@@ -1,0 +1,1885 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formations accompagnement — Ineska Burea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --black:      #0d0d0d;
+      --white:      #f7f4f0;
+      --offwhite:   #ece9e4;
+      --gray-light: #d8d4ce;
+      --gray-mid:   #999490;
+      --gray-dark:  #4a4845;
+      --gold:       #b89a6e;
+      --gold-light: #d4b98a;
+      --gold-dark:  #8a6e48;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--white);
+      color: var(--black);
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────────── */
+    .hero {
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 9rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── Couche 1 : photo N&B ── */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center 20%;
+      filter: grayscale(100%) brightness(0.32) contrast(1.15);
+      transform: scale(1.04);
+      transition: transform 8s ease;
+      z-index: 0;
+    }
+    .hero:hover .hero-bg { transform: scale(1.08); }
+
+    /* ── Couche 2 : voile sombre directionnel ── */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+              linear-gradient(160deg, rgba(13,13,13,0.72) 0%, rgba(20,17,13,0.55) 50%, rgba(13,13,13,0.78) 100%),
+              linear-gradient(to top, rgba(13,13,13,0.9) 0%, transparent 55%);
+      z-index: 1;
+    }
+
+    /* ── Couche 3 : accents dorés ── */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+              radial-gradient(ellipse 70% 50% at 50% 110%, rgba(184,154,110,0.22) 0%, transparent 68%),
+              radial-gradient(ellipse 40% 30% at 80% 20%, rgba(184,154,110,0.10) 0%, transparent 60%),
+              radial-gradient(ellipse 30% 20% at 15% 70%, rgba(184,154,110,0.07) 0%, transparent 55%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Tout le contenu texte au-dessus des couches */
+    .hero > *:not(.hero-bg):not(.hero-overlay) {
+      position: relative;
+      z-index: 3;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; font-weight: 400; letter-spacing: 0.35em;
+      text-transform: uppercase; color: var(--gold-light); margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 300; line-height: 0.95; letter-spacing: -0.02em; margin-bottom: 1rem;
+      opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
+    }
+    .hero-title em { font-style: italic; font-weight: 300; color: var(--gold-light); }
+    .hero-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.5rem); font-weight: 300;
+      letter-spacing: 0.25em; text-transform: uppercase; color: var(--gray-light); margin-bottom: 3rem;
+      opacity: 0; animation: fadeUp 0.9s ease 0.6s forwards;
+    }
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem); font-weight: 300;
+      color: var(--gray-light); max-width: 72ch; line-height: 1.9;
+      opacity: 0; animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+    .hero-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 3rem auto 0;
+      opacity: 0; animation: fadeUp 0.9s ease 1s forwards;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; justify-content: center;
+      margin-top: 2.5rem; padding: 1rem 2.4rem;
+      border: 1px solid var(--gold-light); color: var(--black); background: var(--gold-light);
+      font-size: 0.68rem; font-weight: 400; letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+      opacity: 0; animation: fadeUp 0.9s ease 1.05s forwards;
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+    }
+    .hero-cta:hover { background: transparent; color: var(--gold-light); transform: translateY(-2px); }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gray-mid); display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+      opacity: 0; animation: fadeUp 0.9s ease 1.2s forwards;
+    }
+    .hero-scroll::after {
+      content: ''; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--gray-mid), transparent);
+      animation: scrollPulse 1.8s ease infinite;
+    }
+
+    /* ── STATS BAND ───────────────────────────────────────────── */
+    .intro-band {
+      background: var(--black);
+      padding: 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(184,154,110,0.3);
+      border-bottom: 1px solid rgba(184,154,110,0.3);
+      position: relative;
+    }
+
+    .intro-band::before,
+    .intro-band::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .intro-band::before {
+      left: 0;
+      background: linear-gradient(to right, var(--black), transparent);
+    }
+    .intro-band::after {
+      right: 0;
+      background: linear-gradient(to left, var(--black), transparent);
+    }
+
+    .stats-track {
+      display: flex;
+      white-space: nowrap;
+      animation: scrollStats 40s linear infinite;
+      padding: 1.4rem 0;
+    }
+
+    .stats-scroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .stat-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0 3rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: var(--gray-light);
+      border-right: 1px solid rgba(184,154,110,0.2);
+    }
+
+    .stat-chip:last-child {
+      border-right: none;
+    }
+
+    .stat-chip .chip-icon {
+      font-size: 1.1rem;
+    }
+
+    .stat-chip strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 500;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.02em;
+    }
+
+    @keyframes scrollStats {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION HEADER ───────────────────────────────────────── */
+    .section-header { text-align: center; padding: 6rem 2rem 3rem; max-width: 700px; margin: 0 auto; }
+    .section-eyebrow { font-size: 0.65rem; font-weight: 400; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+    .section-title em { font-style: italic; font-weight: 300; }
+    .section-desc { color: var(--gray-dark); font-size: 1rem; line-height: 1.85; font-weight: 300; }
+    .ornament { display: flex; align-items: center; justify-content: center; gap: 1rem; margin: 2rem auto; }
+    .ornament::before, .ornament::after { content: ''; flex: 1; max-width: 80px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-light)); }
+    .ornament::after { background: linear-gradient(90deg, var(--gold-light), transparent); }
+    .ornament-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
+
+    /* ── GRID ─────────────────────────────────────────────────── */
+    .formations-grid {
+      max-width: 1360px; margin: 0 auto; padding: 2rem 2rem 8rem;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 2px;
+    }
+    .formation-card:first-child { grid-column: span 2; }
+    .formation-card {
+      position: relative; overflow: hidden; background: var(--black);
+      aspect-ratio: 4/3; cursor: pointer;
+    }
+    .formation-card:first-child { aspect-ratio: 16/7; }
+    .formation-card:nth-child(2) {
+      aspect-ratio: auto;
+      min-height: 100%;
+    }
+    .card-image {
+      position: absolute; inset: 0; background-size: cover; background-position: center;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s ease;
+      filter: brightness(0.55) saturate(0.3);
+    }
+    .formation-card:hover .card-image { transform: scale(1.05); filter: brightness(0.4) saturate(0.2); }
+    .card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.4) 45%, rgba(13,13,13,0.1) 100%);
+      transition: opacity 0.5s ease;
+    }
+    .formation-card:hover .card-overlay {
+      background: linear-gradient(to top, rgba(13,13,13,0.98) 0%, rgba(13,13,13,0.7) 50%, rgba(13,13,13,0.3) 100%);
+    }
+    .card-content {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      justify-content: center; padding: 2.5rem; color: var(--white);
+    }
+    .card-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.6rem; font-weight: 400; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--gold-light); margin-bottom: 1rem;
+    }
+    .card-tag::before { content: ''; display: inline-block; width: 18px; height: 1px; background: var(--gold); }
+    .card-number { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-weight: 300; color: var(--gray-mid); letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+    .card-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.8vw, 2.4rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.01em; margin-bottom: 1rem; }
+    .card-title em { font-style: italic; }
+    .card-excerpt {
+      font-size: 0.88rem; line-height: 1.75; color: var(--gray-light); font-weight: 300; max-width: 55ch;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.45s ease 0.05s, transform 0.45s ease 0.05s;
+    }
+    .formation-card:hover .card-excerpt { opacity: 1; transform: translateY(0); }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      flex-wrap: wrap;
+    }
+    .meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+    .meta-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    .meta-label {
+      font-size: 0.52rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+
+    .meta-separator {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.15);
+    }
+    .card-cta {
+      margin-left: auto; font-size: 0.55rem; font-weight: 400; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold-light);
+      display: flex; align-items: center; gap: 0.6rem;
+      opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .card-cta::after { content: '→'; font-size: 0.9rem; letter-spacing: 0; }
+    .formation-card:hover .card-cta { opacity: 1; transform: translateX(0); }
+    .level-badge {
+      position: absolute; top: 1.8rem; right: 1.8rem;
+      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 0.4rem 0.9rem; border: 1px solid rgba(255,255,255,0.22);
+      color: var(--white); background: rgba(13,13,13,0.4); backdrop-filter: blur(8px);
+    }
+    .level-badge.avance { border-color: rgba(184,154,110,0.5); color: var(--gold-light); }
+
+    /* ── LIST SECTION ─────────────────────────────────────────── */
+    .formations-list { background: var(--black); padding: 7rem 2rem; position: relative; overflow: hidden; }
+    .formations-list::before {
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(184,154,110,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .list-inner { max-width: 1100px; margin: 0 auto; }
+    .list-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; gap: 2rem; flex-wrap: wrap; }
+    .list-header .section-title { color: var(--white); text-align: left; margin-bottom: 0; }
+    .list-header .section-eyebrow { text-align: left; }
+    .list-header-left { flex: 1; min-width: 260px; }
+    .list-header-right { font-size: 0.85rem; color: var(--gray-mid); font-weight: 300; line-height: 1.7; max-width: 36ch; text-align: right; }
+    .formation-row {
+      display: grid; grid-template-columns: 3rem 1fr auto;
+      gap: 2rem; align-items: center; padding: 2.2rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      position: relative; cursor: pointer;
+      transition: padding-left 0.3s ease;
+    }
+    .formation-row::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+      background: linear-gradient(90deg, rgba(184,154,110,0.1), transparent);
+      transition: width 0.4s ease;
+    }
+    .formation-row:hover::before { width: 100%; }
+    .formation-row:hover { padding-left: 1rem; }
+    .row-number { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--gold-dark); letter-spacing: 0.05em; }
+    .row-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 2vw, 1.7rem); font-weight: 300; color: var(--white); letter-spacing: -0.01em; margin-bottom: 0.3rem; transition: color 0.3s ease; }
+    .formation-row:hover .row-title { color: var(--gold-light); }
+    .row-tags { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+    .row-tag { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-mid); }
+    .row-tag + .row-tag::before { content: '·'; margin-right: 0.8rem; }
+    .row-meta { text-align: right; display: flex; flex-direction: column; gap: 0.25rem; min-width: 80px; }
+    .row-duration { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300; color: var(--white); }
+    .row-duration-unit { font-size: 0.65rem; color: var(--gray-mid); letter-spacing: 0.2em; text-transform: uppercase; }
+    .row-arrow { color: var(--gold-dark); font-size: 1rem; margin-left: 1rem; opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease; }
+    .formation-row:hover .row-arrow { opacity: 1; transform: translateX(4px); }
+
+    /* ── MODAL OVERLAY ────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(13,13,13,0); backdrop-filter: blur(0px);
+      pointer-events: none;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
+    }
+    .modal-overlay.open {
+      background: rgba(13,13,13,0.65); backdrop-filter: blur(6px);
+      pointer-events: all;
+    }
+
+    /* ── MODAL PANEL ──────────────────────────────────────────── */
+    .modal-panel {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      width: min(700px, 100vw);
+      background: var(--white);
+      z-index: 1001;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+      box-shadow: -20px 0 80px rgba(13,13,13,0.3);
+    }
+    .modal-panel.open { transform: translateX(0); }
+
+    /* image block */
+    .modal-image-wrap {
+      position: relative; flex-shrink: 0;
+      height: clamp(220px, 35vh, 320px); overflow: hidden;
+    }
+    .modal-image {
+      width: 100%; height: 100%;
+      background-size: cover; background-position: center;
+      filter: brightness(0.6) saturate(0.25);
+      transition: filter 0.6s ease;
+    }
+    .modal-image-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.7) 100%);
+    }
+    .modal-image-title {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem 2.5rem;
+      color: var(--white);
+    }
+    .modal-image-eyebrow {
+      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold-light); margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .modal-image-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); display: inline-block; }
+    .modal-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 300; line-height: 1.15;
+    }
+    .modal-h1 em { font-style: italic; }
+
+    /* close button */
+    .modal-close {
+      position: absolute; top: 1.4rem; right: 1.4rem;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(13,13,13,0.5); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1.2rem; line-height: 1;
+      transition: background 0.25s ease, transform 0.25s ease;
+      z-index: 10;
+    }
+    .modal-close:hover { background: rgba(184,154,110,0.6); transform: rotate(90deg); }
+
+    /* body */
+    .modal-body {
+      flex: 1; overflow-y: auto; padding: 2.5rem;
+      scrollbar-width: thin; scrollbar-color: var(--gray-light) transparent;
+    }
+    .modal-body::-webkit-scrollbar { width: 4px; }
+    .modal-body::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 2px; }
+
+    .modal-desc { font-size: 0.95rem; line-height: 1.9; color: var(--gray-dark); margin-bottom: 2.5rem; }
+
+    /* specs grid */
+    .modal-specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-light); margin-bottom: 2.5rem; }
+    @media (max-width: 500px) { .modal-specs { grid-template-columns: repeat(2, 1fr); } }
+    .spec-box { background: var(--white); padding: 1.2rem 1rem; }
+    .spec-value { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 300; color: var(--black); line-height: 1; margin-bottom: 0.25rem; }
+    .spec-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gray-mid); }
+
+    /* programme */
+    .modal-section-title {
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1.2rem; padding-bottom: 0.7rem;
+      border-bottom: 1px solid var(--gray-light);
+    }
+    .modal-list { list-style: none; margin-bottom: 2.5rem; }
+    .modal-list li {
+      font-size: 0.9rem; font-weight: 300; color: var(--gray-dark);
+      padding: 0.7rem 0; border-bottom: 1px solid var(--offwhite);
+      display: flex; align-items: flex-start; gap: 0.9rem;
+    }
+    .modal-list li::before { content: ''; width: 16px; height: 1px; background: var(--gold); flex-shrink: 0; margin-top: 0.6rem; }
+
+    /* prerequisites */
+    .modal-prereq {
+      background: var(--offwhite); padding: 1.5rem; margin-bottom: 2.5rem;
+      border-left: 2px solid var(--gold);
+    }
+    .modal-prereq-label { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .modal-prereq p { font-size: 0.88rem; color: var(--gray-dark); line-height: 1.7; }
+
+    /* footer CTA */
+    .modal-footer {
+      padding: 1.8rem 2.5rem; border-top: 1px solid var(--gray-light);
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+      background: var(--white); flex-shrink: 0;
+    }
+    .modal-price { display: flex; flex-direction: column; }
+    .modal-price-value { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; }
+    .modal-price-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-mid); }
+    .btn-reserve {
+      display: inline-flex; align-items: center; gap: 1rem;
+      background: var(--black); color: var(--white);
+      font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      text-decoration: none; padding: 1.1rem 2.2rem;
+      border: none; cursor: pointer; position: relative; overflow: hidden;
+      transition: color 0.4s ease;
+    }
+    .btn-reserve::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      transform: translateX(-100%); transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .btn-reserve:hover::before { transform: translateX(0); }
+    .btn-reserve span, .btn-reserve .arrow { position: relative; z-index: 1; }
+    .btn-reserve .arrow { transition: transform 0.3s ease; }
+    .btn-reserve:hover .arrow { transform: translateX(4px); }
+
+    /* ── CTA SECTION ──────────────────────────────────────────── */
+    .cta-section {
+      background: var(--offwhite); text-align: center;
+      border-bottom: 30px solid var(--offwhite);
+    }
+    .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      border: 1px solid var(--black); color: var(--black);
+      font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 400;
+      letter-spacing: 0.28em; text-transform: uppercase; text-decoration: none;
+      padding: 1.1rem 2.2rem; transition: background 0.3s ease, color 0.3s ease;
+    }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* ── FOOTER ───────────────────────────────────────────────── */
+    .footer-strip {
+      background: var(--black); color: var(--gray-mid); text-align: center;
+      padding: 2.5rem 2rem; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .footer-strip strong { color: var(--white); font-weight: 400; }
+    .footer-cgv {
+      display: inline-block;
+      color: var(--gold-light);
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      text-decoration: none;
+      opacity: 0.78;
+      transition: opacity 0.25s ease, color 0.25s ease;
+    }
+    .footer-cgv:hover {
+      color: var(--white);
+      opacity: 1;
+    }
+
+    /* ── IMAGE HELPERS ────────────────────────────────────────── */
+    .img-01 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/786bfd88-a619-429d-95d1-bbdd5de8b5b7/photo17.png?content-type=image%2Fpng'); }
+    .img-02 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/165ac2ab-0174-4df6-a8f3-9bf03d1ba0d3/photo2.webp?content-type=image%2Fwebp'); }
+    .img-03 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/064c9246-2fad-40eb-98aa-27a0b6bd82a7/photo10.png?content-type=image%2Fpng'); }
+    .img-04 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/cff304bf-272e-451f-bd95-5908aca6fc91/photo4.webp?content-type=image%2Fwebp'); }
+    .img-05 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/f74109df-a0f6-4ac0-8137-f88cfb871167/photo7.png?content-type=image%2Fpng'); }
+    .img-06 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/86a360ed-0f96-4d53-a410-1febfc72442e/photo3.webp?content-type=image%2Fwebp'); }
+    .img-07 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/907f54b4-90e2-4299-b673-bf06fddbc505/photo14.png?content-type=image%2Fpng'); }
+    .img-08 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/ba85bcec-dde0-47a5-8a77-6733bb81f5bf/photo11.png?content-type=image%2Fpng'); }
+    .img-09 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/f9d24f0d-5bf4-4063-9e54-63ec2c7dacd5/photo9.png?content-type=image%2Fpng'); }
+    .img-10 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/af5fc8cc-c775-40ce-9caf-54a210ba7374/photo6.webp?content-type=image%2Fwebp'); }
+    .img-11 { background-image: url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/cb166f28-fa35-4581-8810-2ed837eec1ba/photo15.png?content-type=image%2Fpng'); }
+    /* CATEGORY NAV */
+    .category-nav {
+      background: var(--black);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    .category-nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .category-link {
+      color: var(--gray-light);
+      border: 1px solid rgba(255,255,255,0.16);
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+    .category-link:hover,
+    .category-link.active {
+      color: var(--black);
+      border-color: var(--gold-light);
+      background: var(--gold-light);
+    }
+
+    /* FUNDING */
+    .funding-band {
+      background: var(--offwhite);
+      padding: 6rem 2rem;
+      border-top: 1px solid var(--gray-light);
+      border-bottom: 1px solid var(--gray-light);
+    }
+    .funding-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .funding-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 3rem;
+      background: var(--gray-light);
+    }
+    .funding-card {
+      background: var(--white);
+      padding: 2rem 1.8rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .funding-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(13,13,13,0.1);
+      z-index: 1;
+    }
+
+    /* Logo area */
+    .funding-logo-wrap {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+      border-bottom: 1px solid var(--offwhite);
+      padding-bottom: 1.4rem;
+    }
+    .funding-logo {
+      max-width: 100%;
+      max-height: 68px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      filter: grayscale(20%);
+      transition: filter 0.3s ease;
+    }
+    .funding-card:hover .funding-logo { filter: grayscale(0%); }
+
+    /* Fallback badge si image absente */
+    .funding-logo-badge {
+      display: none;
+      width: 100%;
+      height: 56px;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--gray-light);
+      color: var(--gray-dark);
+    }
+
+    .funding-card strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      margin-bottom: 0.7rem;
+      color: var(--black);
+    }
+    .funding-card p {
+      color: var(--gray-dark);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      flex: 1;
+    }
+
+    /* Download CTA inside card */
+    .funding-dl {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 1.4rem;
+      padding: 0.75rem 1.2rem;
+      background: var(--black);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      position: relative;
+      overflow: hidden;
+      transition: color 0.35s ease;
+      align-self: flex-start;
+    }
+    .funding-dl::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      transform: translateX(-100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+    .funding-dl:hover::before { transform: translateX(0); }
+    .funding-dl span { position: relative; z-index: 1; }
+    .funding-dl .dl-icon { position: relative; z-index: 1; font-size: 0.85rem; }
+
+    @media (max-width: 680px) {
+      .funding-grid { grid-template-columns: 1fr; }
+      .funding-logos-row { gap: 1px; }
+    }
+
+    /* SATISFACTION BAR */
+    .satisfaction-band {
+      background:
+              linear-gradient(135deg, rgba(13,13,13,0.96) 0%, rgba(42,38,32,0.98) 52%, rgba(13,13,13,0.96) 100%),
+              radial-gradient(ellipse 80% 120% at 15% 0%, rgba(212,185,138,0.22) 0%, transparent 55%),
+              radial-gradient(ellipse 70% 90% at 85% 100%, rgba(184,154,110,0.16) 0%, transparent 58%);
+      color: var(--white);
+      padding: 2rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .satisfaction-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+              linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.045) 50%, transparent 100%),
+              repeating-linear-gradient(90deg, transparent 0 58px, rgba(255,255,255,0.025) 58px 59px);
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .satisfaction-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .satisfaction-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 2rem;
+      margin-bottom: 1.4rem;
+    }
+    .satisfaction-label {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+    .satisfaction-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.4rem);
+      font-weight: 300;
+      line-height: 0.9;
+      color: var(--white);
+    }
+    .satisfaction-bar {
+      position: relative;
+      height: 10px;
+      width: 100%;
+      overflow: hidden;
+      background: rgba(255,255,255,0.12);
+    }
+    /* Barre de progression animée au scroll */
+    .satisfaction-progress {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+      transition: none;
+      display: block;
+    }
+    .satisfaction-progress.animate {
+      animation: satisfactionFill 2.4s ease-out forwards;
+    }
+
+    /* Chiffres */
+    .satisfaction-stat-number {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .satisfaction-stat-number.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .satisfaction-details {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1px;
+      margin-top: 1.8rem;
+      background: rgba(255,255,255,0.12);
+    }
+    .satisfaction-detail {
+      background: var(--black);
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .satisfaction-detail strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 0.35rem;
+    }
+    .satisfaction-detail span {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+
+    /* ── ANIMATIONS ───────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(0.8); }
+      50%       { opacity: 1;   transform: scaleY(1); }
+    }
+    @keyframes satisfactionFill {
+      from { width: 0%; }
+      to   { width: 99%; }
+    }
+    }
+    @keyframes satisfactionGlow {
+      0%, 100% { filter: brightness(1); }
+      50%      { filter: brightness(1.35); }
+    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ───────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .formation-card:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+      .formations-grid { grid-template-columns: 1fr; }
+      .list-header { flex-direction: column; align-items: flex-start; }
+      .list-header-right { text-align: left; }
+      .formation-row { grid-template-columns: 2.5rem 1fr auto; gap: 1rem; }
+    }
+    @media (max-width: 600px) {
+      .formation-row { grid-template-columns: 1fr auto; }
+      .row-number { display: none; }
+      .satisfaction-heading { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .satisfaction-details { grid-template-columns: repeat(2, 1fr); }
+      .category-nav-inner { justify-content: flex-start; }
+      .category-link { flex: 1 1 100%; text-align: center; }
+      .funding-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Logos row dans la carte financements */
+    .funding-logos-row {
+      display: flex;
+      gap: 1px;
+      margin-bottom: 1.6rem;
+      background: var(--gray-light);
+      border-bottom: 1px solid var(--gray-light);
+      padding-bottom: 1.6rem;
+    }
+    .funding-logo-sm-wrap {
+      flex: 1;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+    }
+    .funding-logo-sm {
+      max-width: 90%;
+      max-height: 48px;
+      object-fit: contain;
+      filter: grayscale(20%);
+      transition: filter 0.3s ease;
+    }
+    .funding-card:hover .funding-logo-sm { filter: grayscale(0%); }
+    .funding-logo-badge-sm {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.55rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .funding-list {
+      list-style: none;
+      margin-top: 0.9rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .funding-list li {
+      font-size: 0.88rem;
+      color: var(--gray-dark);
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--offwhite);
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+      line-height: 1.6;
+    }
+    .funding-list li::before {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 1px;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.6rem;
+    }
+    .funding-list li span {
+      font-weight: 500;
+      color: var(--black);
+      white-space: nowrap;
+    }
+    /* ── FOOTER ENRICHI ── */
+    .footer-strip {
+      background: var(--black);
+      color: var(--gray-mid);
+      padding: 0;
+      border-top: 1px solid rgba(184,154,110,0.25);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .footer-qualiopi {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+    }
+    .footer-qualiopi-img {
+      height: 180px;
+      width: auto;
+      object-fit: contain;
+      filter: none;
+      transition: opacity 0.3s ease;
+    }
+    .footer-qualiopi-fallback {
+      display: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      color: var(--gold-light);
+    }
+    .footer-qualiopi-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .footer-sep {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .footer-links {
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      flex: 1;
+      min-width: 200px;
+    }
+    .footer-links strong { color: var(--white); font-weight: 400; }
+    .footer-dot { margin: 0 0.5rem; opacity: 0.4; }
+    .footer-legal {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-shrink: 0;
+    }
+    .footer-cgv {
+      color: var(--gold-light);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      opacity: 0.78;
+      transition: opacity 0.25s ease, color 0.25s ease;
+      font-family: 'Jost', sans-serif;
+    }
+    .footer-cgv:hover { color: var(--white); opacity: 1; }
+    @media (max-width: 700px) {
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .footer-sep { width: 60px; height: 1px; }
+    }
+    /* ── ABOUT FORMATIONS ── */
+    .about-formations {
+      background: transparent;
+      border-top: 1px solid var(--gray-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-formations::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/votre-image-background.jpg');
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%) brightness(0.25);
+      z-index: 0;
+    }
+
+    .about-formations-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-formations-inner.reverse .about-formations-content {
+      order: 1;
+    }
+    .about-formations-inner.reverse .about-formations-image-wrap {
+      order: 2;
+    }
+
+    /* Séparateur doré entre les 2 blocs */
+    .about-formations-divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.4;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Image */
+    .about-formations-image-wrap {
+      position: relative;
+      padding: 0 16px 16px 0;
+    }
+    .about-formations-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter: saturate(0.15) brightness(0.85);
+      transition: filter 0.6s ease;
+      box-shadow: 16px 16px 0px var(--gold);
+    }
+    .about-formations-image-wrap:hover .about-formations-image {
+      filter: saturate(0.5) brightness(0.95);
+    }
+    .about-formations-inner.reverse .about-formations-image-wrap {
+      padding: 0 0 16px 16px;
+    }
+    .about-formations-inner.reverse .about-formations-image {
+      box-shadow: -16px 16px 0px var(--gold);
+    }
+    /* Texte */
+    .about-formations-content {
+      text-align: center;
+    }
+    .about-formations-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+      color: var(--white);
+    }
+    .about-formations-title em {
+      font-style: italic;
+    }
+    .about-formations-text {
+      color: var(--gray-dark);
+      font-size: 0.95rem;
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .about-formations-inner,
+      .about-formations-inner.reverse {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        direction: ltr;
+      }
+      /* Sur mobile l'image passe toujours en premier */
+      .about-formations-inner.reverse .about-formations-image-wrap {
+        order: -1;
+      }
+    }    /* ── FOOTER ADDRESS BAND ── */
+    .footer-address-band {
+      background: var(--offwhite);
+      padding: 5rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .footer-address-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .footer-address-image-wrap {
+      overflow: hidden;
+    }
+    .footer-address-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(80%) brightness(0.75);
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+    .footer-address-image-wrap:hover .footer-address-image {
+      filter: none;
+      transform: scale(1.03);
+    }
+    .footer-address-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 1.2rem;
+    }
+    .footer-address-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+    .footer-address-title em {
+      font-style: italic;
+    }
+    .footer-address-text {
+      font-style: normal;
+      color: var(--black);
+      font-size: 0.95rem;
+      line-height: 2;
+      margin-bottom: 2rem;
+    }
+    .footer-address-text span {
+      color: var(--black);
+      font-weight: 400;
+    }
+    .footer-address-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(184,154,110,0.3);
+      padding-bottom: 0.3rem;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .footer-address-link:hover {
+      color: var(--black);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .footer-address-arrow {
+      transition: transform 0.3s ease;
+    }
+    .footer-address-link:hover .footer-address-arrow {
+      transform: translateX(4px);
+    }
+    @media (max-width: 760px) {
+      .footer-address-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .formations-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem 1rem 4rem;
+      }
+
+      .formation-card:first-child {
+        grid-column: span 1;
+        aspect-ratio: 4/3;
+      }
+
+      .formation-card:nth-child(2) {
+        aspect-ratio: 4/3;
+        min-height: auto;
+      }
+
+      .card-title {
+        font-size: 1.4rem;
+      }
+
+      .card-content {
+        padding: 1.5rem;
+      }
+
+      .card-excerpt {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-bg" style="background-image:url('https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/d3b050bf-2c4f-49e5-8852-8db6c939b17d/photo8.png?content-type=image%2Fpng')"></div>
+  <div class="hero-overlay"></div>
+  <p class="hero-eyebrow">Ineska Burea · Accompagnement professionnel</p>
+  <h1 class="hero-title">Formations<br/><em>Accompagnement</em></h1>
+  <p class="hero-brand">Structurer son activité</p>
+  <p class="hero-desc">Spécialisé dans les métiers de la beauté et de l’esthétique, le centre propose des formations
+    complètes, modernes et adaptées aux tendances actuelles. Les apprenants peuvent se
+    perfectionner dans différents domaines de la coiffure tels que le coiffage, la pose
+    d’extensions, les techniques de lissage et les soins capillaires, mais également dans le
+    maquillage professionnel et les métiers de la prothésie ongulaire.</p>
+  <div class="hero-divider"></div>
+  <a href="#formations" class="hero-cta">Découvrir</a>
+</section>
+<nav class="category-nav" aria-label="Catégories de formations">
+  <div class="category-nav-inner">
+    <a class="category-link" href="formations-coiffure.html">Formations coiffure</a>
+    <a class="category-link" href="formations-beaute.html">Formations beauté</a>
+    <a class="category-link active" href="formations-accompagnement.html">Formations accompagnement</a>
+  </div>
+</nav>
+<section class="about-formations reveal">
+
+  <!-- Bloc 1 -->
+  <div class="about-formations-inner">
+    <div class="about-formations-image-wrap">
+      <img src="https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/ed4f44be-f475-4c96-83f9-da8a398dfe60/photo12.png?content-type=image%2Fpng"
+           alt="Formations Ineska Burea"
+           class="about-formations-image">
+    </div>
+    <div class="about-formations-content">
+      <p class="section-eyebrow">À propos des formations</p>
+      <div class="ornament"><span class="ornament-diamond"></span></div>
+      <p class="about-formations-text">
+        Fondé par Inesa Buréa, professionnelle passionnée forte d’une riche expérience acquise à
+        travers l’Europe, ce centre de formation à taille humaine accompagne les futurs talents et les
+        professionnels de la beauté dans le développement de leurs compétences et de leur savoir-
+        faire.
+      </p>
+      <p class="about-formations-text">
+        Grâce à une pédagogie axée sur la pratique, l’excellence et l’accompagnement personnalisé,
+        chaque formation permet de développer des compétences concrètes et recherchées dans le
+        secteur de la beauté.
+        Le centre accompagne également les entrepreneurs, indépendants et organismes de formation
+        avec des services dédiés au digital, à la communication ainsi qu’à l’accompagnement
+        Qualiopi, afin d’aider chaque structure à évoluer, se professionnaliser et gagner en visibilité.
+        Porté par des valeurs de transmission, de passion et de proximité, le centre de formation créé
+        par Inesa Buréa met l’humain et la réussite de ses apprenants au cœur de chaque parcours.
+      </p>
+    </div>
+  </div>
+
+  <!-- S -->
+  <div class="about-formations-divider"></div>
+
+  <!-- Bloc 2-->
+  <div class="about-formations-inner reverse">
+    <div class="about-formations-content">
+      <div class="ornament"><span class="ornament-diamond"></span></div>
+      <p class="about-formations-text">
+        Porté par des valeurs de transmission, de passion et de proximité, le centre de formation créé
+        par Inesa Buréa met l’humain et la réussite de ses apprenants au cœur de chaque parcours.
+        Parce que l’accès à la formation doit être possible pour tous, notre centre attache une
+        importance particulière à l’accessibilité et à l’accompagnement de chaque apprenant, quelles
+        que soient ses situations ou ses besoins spécifiques.
+      </p>
+      <p class="about-formations-text">
+        Dans cette démarche inclusive, notre référente handicap, Chtir Hanêne, est à l’écoute des
+        stagiaires afin d’identifier les besoins d’adaptation, proposer un accompagnement
+        personnalisé et faciliter le bon déroulement du parcours de formation. Notre objectif est de
+        garantir à chacun un environnement bienveillant, accessible et propice à la réussite
+        professionnelle.
+      </p>
+    </div>
+    <div class="about-formations-image-wrap">
+      <img src="https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/13980bde-ca7d-4928-9377-779e90b904a8/photo13.png?content-type=image%2Fpng"
+           alt="Pratique formations Ineska Burea"
+           class="about-formations-image">
+    </div>
+  </div>
+
+</section>
+<!-- ── SATISFACTION ─────────────────────────────────────────────── -->
+<section class="satisfaction-band reveal" aria-label="Taux de satisfaction des formations">
+  <div class="satisfaction-inner">
+    <div class="satisfaction-heading">
+      <p class="satisfaction-label">Taux de satisfaction</p>
+      <strong class="satisfaction-value satisfaction-stat-number" data-target="99">0</strong>
+    </div>
+    <div class="satisfaction-bar" aria-hidden="true">
+      <div class="satisfaction-progress"></div>
+    </div>
+    <div class="satisfaction-details">
+      <div class="satisfaction-detail">
+        <strong class="satisfaction-stat-number" data-target="100">0</strong>
+        <span>Accueil et déroulement de la formation</span>
+      </div>
+      <div class="satisfaction-detail">
+        <strong class="satisfaction-stat-number" data-target="98">0</strong>
+        <span>Support pédagogique et suivi</span>
+      </div>
+      <div class="satisfaction-detail">
+        <strong class="satisfaction-stat-number" data-target="100">0</strong>
+        <span>Disponibilité et à l'écoute</span>
+      </div>
+      <div class="satisfaction-detail">
+        <strong class="satisfaction-stat-number" data-target="100">0</strong>
+        <span>Recommandation</span>
+      </div>
+      <div class="satisfaction-detail">
+        <strong class="satisfaction-stat-number" data-target="100">0</strong>
+        <span>Réussite</span>
+      </div>
+      <div class="satisfaction-detail">
+        <strong class="satisfaction-stat-number" data-target="0">0</strong>
+        <span>Abandon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="formations">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Accompagnement</p>
+    <h2 class="section-title">Nos formations <em>accompagnements</em></h2>
+    <div class="ornament"><span class="ornament-diamond"></span></div>
+    <p class="section-desc">Des modules orientés méthode, organisation, communication client et gestion des prestations à fort enjeu.</p>
+  </div>
+
+  <div class="formations-grid">
+    <!-- Carte 10 -->
+    <article class="formation-card reveal" data-id="10">
+      <div class="card-image img-10"></div><div class="card-overlay"></div>
+      <span class="level-badge">Débutant</span>
+      <div class="card-content">
+        <span class="card-tag">Digital &amp; communication</span>
+        <span class="card-number">10</span>
+        <h3 class="card-title">Community Manager<br/><em>Réseaux Sociaux</em></h3>
+        <p class="card-excerpt">Stratégie digitale, création de contenu (Reels, Stories, Carrousels), gestion d'Instagram, Facebook, TikTok et LinkedIn, analyse des performances avec Canva et Meta Business Suite.</p>
+        <div class="card-meta">
+          <div class="meta-item"><span class="meta-value">5 jours</span><span class="meta-label">Durée</span></div>
+          <div class="meta-separator"></div>
+          <div class="meta-item"><span class="meta-value">35h</span><span class="meta-label">Volume</span></div>
+          <div class="meta-separator"></div>
+          <div class="meta-item"><span class="meta-value">990 €</span><span class="meta-label">Tarif</span></div>
+          <span class="card-cta">Voir la fiche</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Carte 11 -->
+    <article class="formation-card reveal" data-id="11">
+      <div class="card-image img-11"></div><div class="card-overlay"></div>
+      <span class="level-badge avance">Expert</span>
+      <div class="card-content">
+        <span class="card-tag">Certification qualité</span>
+        <span class="card-number">11</span>
+        <h3 class="card-title">Accompagnement<br/><em>Certification Qualiopi</em></h3>
+        <p class="card-excerpt">Maîtrisez les 7 critères et 32 indicateurs du RNQ, construisez vos preuves de conformité et préparez vos audits initial, de surveillance et de renouvellement.</p>
+        <div class="card-meta">
+          <div class="meta-item"><span class="meta-value">10 jours</span><span class="meta-label">Durée</span></div>
+          <div class="meta-separator"></div>
+          <div class="meta-item"><span class="meta-value">70h</span><span class="meta-label">Volume</span></div>
+          <div class="meta-separator"></div>
+          <div class="meta-item"><span class="meta-value">1 750 €</span><span class="meta-label">Tarif</span></div>
+          <span class="card-cta">Voir la fiche</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+<section class="funding-band reveal">
+  <div class="funding-inner">
+    <div class="section-header" style="padding:0;max-width:760px">
+      <p class="section-eyebrow">Certification &amp; financements</p>
+      <h2 class="section-title">Des formations <em>professionnelles</em></h2>
+      <div class="ornament"><span class="ornament-diamond"></span></div>
+      <p class="section-desc">Les parcours peuvent s'inscrire dans une démarche de formation professionnelle, avec accompagnement possible pour l'étude des prises en charge selon votre situation.</p>
+    </div>
+
+    <div class="funding-grid">
+
+      <!-- ── QUALIOPI ── -->
+      <div class="funding-card">
+        <div class="funding-logo-wrap">
+          <img src="logo/qualiopilogo.png" alt="Certification Qualiopi" class="funding-logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="funding-logo-badge" style="background:#0B1F3A;color:#D4B98A;border:none;font-size:1rem;letter-spacing:0.25em">QUALIOPI</div>
+        </div>
+        <strong>Qualiopi</strong>
+        <p>Notre centre de formation est certifié Qualiopi, une reconnaissance officielle qui atteste de la
+          qualité de nos formations, de notre accompagnement et de nos processus pédagogiques. Cette
+          certification garantit aux apprenants et aux partenaires un haut niveau d’exigence, de
+          professionnalisme et de conformité aux standards de la formation professionnelle.
+          Être certifié Qualiopi, c’est également l’engagement d’offrir des formations structurées,
+          adaptées aux besoins du marché et centrées sur la réussite de chaque apprenant.</p>
+        <a href="documents/certificat-qualiopi.pdf" download class="funding-dl">
+          <span class="dl-icon">↓</span>
+          <span>Télécharger le certificat</span>
+        </a>
+      </div>
+
+      <!-- ── FINANCEMENTS ── -->
+      <div class="funding-card">
+        <div class="funding-logos-row">
+          <div class="funding-logo-sm-wrap">
+            <img src="logo/francetravail.svg" alt="France Travail" class="funding-logo-sm"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="funding-logo-badge-sm" style="background:#0056A6;color:#fff">France Travail</div>
+          </div>
+          <div class="funding-logo-sm-wrap">
+            <img src="logo/opco.svg" alt="OPCO" class="funding-logo-sm"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="funding-logo-badge-sm" style="background:#2E7D8C;color:#fff">OPCO</div>
+          </div>
+          <div class="funding-logo-sm-wrap">
+            <img src="images/logo-faf.png" alt="FAF" class="funding-logo-sm"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="funding-logo-badge-sm" style="background:#000000;color:#fff">FAF</div>
+          </div>
+        </div>
+        <strong>Financements possibles</strong>
+        <p>Afin de rendre nos formations accessibles au plus grand nombre, plusieurs solutions de
+          financement peuvent être proposées selon votre situation professionnelle.
+          Nos formations peuvent être prises en charge par différents organismes et dispositifs tels que
+          France Travail, les OPCO, les FAF pour les travailleurs indépendants, les aides régionales, les
+          missions locales ou encore certains financements dédiés aux entreprises et aux salariés dans le
+          cadre du développement des compétences.
+
+          Notre équipe accompagne chaque apprenant dans ses démarches administratives afin de
+          trouver la solution de financement la plus adaptée à son projet professionnel.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- ── ADRESSE & LIEU ── -->
+<section class="cta-section">
+  <div class="footer-address-band">
+    <div class="footer-address-inner">
+
+      <!-- Image du lieu -->
+      <div class="footer-address-image-wrap">
+        <img src="https://images.squarespace-cdn.com/content/669e5e56016b271205f1b845/d1c0997e-3ca5-45c1-9ebf-dd7b6b7eb584/lieu.png?content-type=image%2Fpng"
+             alt="Lieu de formation Ineska Burea"
+             class="footer-address-image">
+      </div>
+
+      <!-- Adresse -->
+      <div class="footer-address-content">
+        <p class="footer-address-eyebrow">Où nous trouver</p>
+        <h3 class="footer-address-title">Le lieu<br/><em>de formation</em></h3>
+        <address class="footer-address-text">
+          <span>Ineska Burea</span><br/>
+          112 avenue Paul Valéry<br/>
+          83160 LA VALETTE DU VAR<br/>
+          France
+        </address>
+        <a href="https://www.google.com/maps/place/112+Av.+Paul+Valéry,+83160+La+Valette-du-Var/@43.1298215,5.9876745,17z/data=!3m1!4b1!4m6!3m5!1s0x12c919796474e3b5:0x633e4c66ccb4aa1f!8m2!3d43.1298215!4d5.9902494!16s%2Fg%2F11rg63x8yb?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="footer-address-link">
+          <span>Voir sur Google Maps</span>
+          <span class="footer-address-arrow">→</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+  <div class="section-header" style="padding-bottom:0">
+    <p class="section-desc" >Délai moyen entre l’inscription et le démarrage :
+      1 à 4 semaines selon les sessions disponibles et la prise en charge du financement.</p>
+    <p class="section-eyebrow">Vous avez une question ?</p>
+    <div class="ornament"><span class="ornament-diamond"></span></div>
+  </div>
+  <div class="cta-buttons">
+    <a href="mailto:contact@ineskaburea.fr" class="btn-reserve" style="text-decoration:none"><span>Envoyer un message</span><span class="arrow">→</span></a>
+    <a href="tel:+33XXXXXXXXX" class="btn-outline">Appeler : 06.00.00.00.00</a>
+  </div>
+</section>
+<footer class="footer-strip">
+  <div class="footer-inner">
+
+    <!-- Logo Qualiopi -->
+    <div class="footer-qualiopi">
+      <img src="documents/qualiopi-image.png" alt="Certification Qualiopi" class="footer-qualiopi-img"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'">
+      <span class="footer-qualiopi-fallback">QUALIOPI</span>
+      <p class="footer-qualiopi-label">Organisme certifié</p>
+    </div>
+
+    <!-- Séparateur -->
+    <div class="footer-sep"></div>
+
+    <!-- Liens -->
+    <div class="footer-links">
+      <strong>Ineska Burea</strong>
+      <span class="footer-dot">·</span>
+      Coiffure Mariage &amp; Grand Événement
+      <span class="footer-dot">·</span>
+      Formations Professionnelles
+    </div>
+    <div class="footer-legal">
+      <a href="documents/CGV%20INESK%20BEAUTE.pdf" download class="footer-cgv">↓ Télécharger les CGV</a>
+      <span class="footer-dot">·</span>
+      <a>Politique de confidentialité</a>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ── MODAL ──────────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal-panel" id="modalPanel" role="dialog" aria-modal="true" aria-label="Fiche formation">
+  <div class="modal-image-wrap">
+    <div class="modal-image" id="modalImage"></div>
+    <div class="modal-image-overlay"></div>
+    <div class="modal-image-title">
+      <p class="modal-image-eyebrow" id="modalEyebrow"></p>
+      <h2 class="modal-h1" id="modalTitle"></h2>
+    </div>
+    <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+  </div>
+  <div class="modal-body" id="modalBody"></div>
+  <div class="modal-footer" id="modalFooter"></div>
+</div>
+<script>
+  /* ── DATA ─────────────────────────────────────────────────────────── */
+  const formations = {
+    1: {
+      tag: "Coiffure Évènementielle · Chignon 3D",
+      title: "Techniques Coiffure\n<em>Évènementielle &amp; Chignon 3D</em>",
+      imgClass: "img-01",
+      duree: "5 jours (35h)", places: "À définir", niveau: "Tous professionnels", certif: "Oui",
+      prix: "990 €",
+      doc: "modules/Programme%20de%20formation%20CHIGNON%203D%20.docx",
+      description: "Cette formation a pour objectif l'acquisition d'une compétence complémentaire en réalisant des coiffures évènementielles. Elle s'adresse aux professionnels de la coiffure, de la beauté ou toute personne désirant se former pour développer les techniques modernes de coiffures pour mariages, galas, shootings, cérémonies et fêtes, en réponse aux tendances actuelles.",
+      programme: [
+        "Jour 1 — Mise en place du poste de travail, présentation des produits et outils, approche client : établissement des attentes et diagnostic cheveux. Découverte des différentes formes d'attaches et de chignons",
+        "Jour 2 — Coiffure invitée : préparer la chevelure, réaliser des séparations, maîtriser les différents points d'attaches",
+        "Jour 3 — Chignon flou : techniques d'attaches adaptées, méthodes, astuces et étapes de séparation pour créer mouvement et volume",
+        "Jour 4 — Chignon WAVY mariée (semi-attaché et attache rapide), ondulations, boucles et crêpage, différentes coiffures mariées",
+        "Jour 5 — Récapitulatif de la semaine. Évaluation individuelle sur modèle vivant en temps limité, débriefing et questionnaire de satisfaction. Remise de l'attestation de formation",
+        "Méthode : alternance d'apports théoriques et pratiques, travaux individuels, mises en situation sur modèles vivants",
+        "Matériel à prévoir : fer à boucler Babyliss 25mm, cire Redken, laque Silhouette Schwarzkopf"
+      ],
+      prerequis: "Aucun prérequis. Formation ouverte à tous les professionnels de la coiffure, de la beauté ou de l'esthétique désireux d'apprendre de nouvelles techniques de coiffage."
+    },
+    2: {
+      tag: "Coiffure · Extensions Capillaires",
+      title: "Extensions de Cheveux\n<em>Kératine à Froid</em>",
+      imgClass: "img-02",
+      duree: "2 jours (14h)", places: "À définir", niveau: "Tous professionnels", certif: "Oui",
+      prix: "350 €",
+      doc: "modules/Programme%20de%20formation%20EXTENTION%20KERATINE%20A%20FROID%20.docx",
+      description: "Cette formation a pour objectif de maîtriser la pose, l'entretien et la dépose des extensions kératine par ultrasons à froid. Elle s'adresse aux professionnels de la coiffure, de la beauté ou de l'esthétique désireux d'intégrer cette technique moderne et très demandée à leur offre de prestations.",
+      programme: [
+        "Jour 1 matin — Introduction aux extensions capillaires et différentes techniques, avantages de la technologie ultrasons, anatomie du cheveu et cycle de vie, identification des cheveux adaptés, présentation du matériel professionnel",
+        "Jour 1 après-midi — Diagnostic client et analyse du cuir chevelu, préparation des cheveux (lavage technique et séchage), sectionnement professionnel, démonstration de pose par le formateur, première pratique sur tête malléable",
+        "Jour 2 matin — Rappel des techniques et corrections, pose d'extensions sur tête malléable ou modèle, respect des zones de sécurité, pose de 40 à 60 mèches, ajustement et fondu avec les cheveux naturels",
+        "Jour 2 après-midi — Entretien des extensions (brossage, produits recommandés), conseils clients pour la durabilité, techniques de dépose sans abîmer le cheveu, correction des erreurs de pose, conseils de tarification et gestion de prestation",
+        "Évaluation théorique : échange oral sur les techniques, l'anatomie du cheveu et le matériel",
+        "Évaluation pratique finale : pose complète ou partielle sur tête malléable ou modèle réel",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Aucun prérequis. Formation ouverte à tous les professionnels de la coiffure, de la beauté ou de l'esthétique désireux d'apprendre les extensions kératine à froid."
+    },
+    3: {
+      tag: "Coiffure · Extensions Capillaires",
+      title: "Extensions de Cheveux\n<em>Adhésives Tape-In</em>",
+      imgClass: "img-03",
+      duree: "2 jours (14h)", places: "À définir", niveau: "Tous professionnels", certif: "Oui",
+      prix: "350 €",
+      doc: "modules/Programme%20de%20formation%20EXTENTION%20AGHESIVE%20.docx",
+      description: "Cette formation a pour objectif d'apprendre la pose rapide, l'entretien et la réutilisation des extensions adhésives tape-in. Une technique accessible, rapide à poser et très rentable, idéale pour enrichir son offre de prestations en salon ou à domicile.",
+      programme: [
+        "Jour 1 matin — Présentation de la technique tape-in, avantages et inconvénients, types d'extensions adhésives, matériel nécessaire, diagnostic client et choix du volume",
+        "Jour 1 après-midi — Préparation des cheveux (lavage clarifiant, séchage sans produit), sectionnement précis, démonstration de la pose technique sandwich, pratique sur tête malléable",
+        "Jour 2 matin — Pose complète sur tête malléable ou modèle, pose de 10 à 20 bandes, adaptation de la coupe : effilage et dégradé, entretien des extensions adhésives",
+        "Jour 2 après-midi — Technique de dépose avec remover, nettoyage et remplacement des adhésifs, repose et réutilisation des extensions, tarification et rentabilité de la prestation",
+        "Évaluation théorique : échange oral sur les techniques, le matériel et les règles d'hygiène",
+        "Évaluation pratique finale : pose complète ou partielle sur tête malléable ou modèle réel",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Aucun prérequis. Formation ouverte à tous les professionnels de la coiffure, de la beauté ou de l'esthétique désireux d'apprendre les extensions adhésives."
+    },
+    4: {
+      tag: "Coiffure · Compétition",
+      title: "Préparation aux Concours\n<em>Championnat de Coiffure</em>",
+      imgClass: "img-04",
+      duree: "5 jours (30h)", places: "4 max.", niveau: "Professionnel expérimenté", certif: "Oui",
+      prix: "1 250 €",
+      doc: "modules/Programme%20de%20formation%20coiffure%20concours%20.docx",
+      description: "Formation intensive dédiée à la préparation aux concours et championnats de coiffure, niveau Excellence et Équipe de France. En 5 jours, vous maîtrisez les structures de compétition, la gestion du temps sous chronomètre, les critères de notation des jurys et les finitions qui font la différence entre une coiffure commerciale et une coiffure de championnat.",
+      programme: [
+        "Jour 1 — Univers des concours : fonctionnement des championnats nationaux et internationaux, lecture des règlements, catégories d'épreuves. Préparation du cheveu selon sa texture (fins, lourds, glissants, sensibilisés), crêpage stratégique, texturisation et fixation invisible",
+        "Jour 2 — Architecture et structures : construction d'une coiffure de compétition, points d'ancrage, structures internes invisibles, volume maîtrisé, attaches techniques (couture, croisements, renforts, structures grillagées), gestion des asymétries et solidité sans surcharge",
+        "Jour 3 — Kit compétition : produits indispensables (sprays, poudres, gels, cires, colles techniques), organisation optimale du matériel. Méthodologie : découpage stratégique, fiches techniques personnelles, gestion mentale, plan de travail chronométré",
+        "Jour 4 — Gestion du temps : travail sous chronomètre, priorisation, optimisation des gestes, gestion du stress, récupération en cas d'erreur. Critères du jury : symétrie, netteté, cohérence artistique, originalité maîtrisée, finitions invisibles, défauts éliminatoires",
+        "Jour 5 — Finitions haut niveau : brillance, contrôle des mèches parasites, élégance des volumes, signature artistique, posture du compétiteur, présentation finale du modèle. Évaluation individuelle chronométrée sur grille jury championnat, remise de l'attestation",
+        "Groupe de 4 stagiaires maximum pour un encadrement individualisé",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Maîtrise des bases de la coiffure et du coiffage, savoir réaliser des attaches classiques, expérience salon recommandée. Public visé : coiffeurs professionnels, apprentis BP/BM/BTS, membres ou futurs membres d'équipes concours."
+    },
+    5: {
+      tag: "Coiffure · Artistique & Évènementiel",
+      title: "Coiffure Évènementielle\n<em>Tresses XXL &amp; Extensions</em>",
+      imgClass: "img-05",
+      duree: "5 jours (30h)", places: "4 max.", niveau: "Tous publics", certif: "Oui",
+      prix: "990 €",
+      doc: "modules/Programme%20de%20formation%20coiffure%20et%20tresses%20xxl%20.docx",
+      description: "Créer des coiffures évènementielles artistiques spectaculaires à partir de cheveux fins ou peu volumineux grâce aux extensions à clips et aux tresses XXL modernes. Un rendu haut de gamme, photogénique et confortable pour des mariages, galas et shootings. Formation ouverte à tous : étudiants, demandeurs d'emploi, salariés et professionnels.",
+      programme: [
+        "Jour 1 — Vision artistique & tendances : tresse Raiponce romantique, ponytail XXL, demi-attache volumineuse, chignon texturé géant, bubble braid luxe. Harmonie coiffure/robe/accessoires, inspirations Pinterest & Instagram, création d'une signature visuelle",
+        "Jour 2 — Extensions à clips : choix des extensions (grammage, texture, couleur), préparation des cheveux, crêpage stratégique, pose professionnelle, camouflage, adaptation aux cheveux fins/mi-longs/glissants, tenue longue durée et erreurs à éviter",
+        "Jour 3 — Construction du volume spectaculaire : backcombing intelligent, pancaking moderne, volume invisible, coussins de volume, double extension. Travail des textures : wavy glamour, ondulations bohèmes, finition glossy photo. Secrets des coiffures Instagram",
+        "Jour 4 — Tresses XXL Raiponce : niveau 1 (tresse 3 brins, bohème, pancake), niveau 2 (épi XXL, hollandaise volumineuse, bulle luxe, sirène), niveau 3 (couture/editorial, mix textures & accessoires, tresse fleur, asymétrique artistique). Tenue 12h+, anti-frisottis",
+        "Jour 5 — Coiffures mariage complètes : demi-attache royale, ponytail Hollywood XXL, chignon bohème luxe, chignon tressé volumineux, coiffure bijoux/fleurs, coiffure voile & accessoires. Gestion cliente, timing réel mariage, évaluation sur modèle vivant, remise de l'attestation",
+        "Groupe de 4 stagiaires maximum pour un encadrement individualisé",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Aucun prérequis. Formation ouverte à tous : étudiants, demandeurs d'emploi, salariés, professionnels de la coiffure, de la beauté ou de l'esthétique souhaitant apprendre des techniques de coiffage artistiques."
+    },
+    6: {
+      tag: "Coiffure · Lissage & Soins",
+      title: "Lissage Professionnel\n<em>&amp; Botox Capillaire</em>",
+      imgClass: "img-06",
+      duree: "5 jours (35h)", places: "À définir", niveau: "Tous professionnels", certif: "Oui",
+      prix: "990 €",
+      doc: "modules/Programme%20de%20formation%20lissage%20.docx",
+      description: "Formation professionnelle complète aux techniques de lissage et soins botox capillaires. En 5 jours, vous maîtrisez les protocoles de lissage, le diagnostic capillaire, les cas techniques particuliers (cheveux décolorés, crépus, sensibilisés) ainsi que les aspects commerciaux pour développer votre activité autour de ces prestations très demandées.",
+      programme: [
+        "Jour 1 — Introduction aux techniques de lissage : historique, types de lissage, actifs capillaires, résultats et limites. Biologie & diagnostic capillaire : structure du cheveu, analyse des types, identification des contre-indications, choix du protocole adapté",
+        "Jour 2 — Hygiène, sécurité et environnement de travail : désinfection, entretien du poste, sécurité des appareils chauffants, prévention des risques. Soin botox capillaire : préparation, application, temps de pause, travail thermique, résultat final et conseils post-prestation",
+        "Jour 3 — Lissage professionnel : préparation technique, application du produit, temps de pose, brushing technique, travail des plaques, finition professionnelle. Cas particuliers : cheveux décolorés, très sensibilisés, crépus et très épais, gestion des risques et erreurs à éviter",
+        "Jour 4 — Conseil client : conseils d'entretien, produits adaptés, routine capillaire, gestion des attentes. Développement d'activité : organisation des prestations, calcul des coûts, tarification, développement clientèle, communication professionnelle",
+        "Jour 5 — Révision et débriefing. Évaluation individuelle : réalisation d'un lissage complet (4h) en mise en situation professionnelle. Questionnaire de satisfaction, remise de l'attestation de formation",
+        "8 modules progressifs : de l'introduction aux techniques jusqu'à la rentabilité commerciale",
+        "Lieu : 5 Place Puget — 83000 Toulon"
+      ],
+      prerequis: "Aucun diplôme exigé. Une première expérience dans la coiffure ou l'esthétique est un avantage mais n'est pas obligatoire. Formation ouverte à tous les professionnels de la coiffure, de la beauté ou de l'esthétique."
+    },
+    7: {
+      tag: "Beauté · Maquillage",
+      title: "Initiation au\n<em>Maquillage Professionnel</em>",
+      imgClass: "img-07",
+      duree: "5 jours (30h)", places: "4 max.", niveau: "Débutant", certif: "Oui",
+      prix: "990 €",
+      doc: "modules/Programme%20de%20formation%20MAQUILLAGE%20.docx",
+      description: "Formation complète aux bases du maquillage professionnel : du maquillage naturel au sophistiqué, en passant par le maquillage mariée et le maquillage libanais. Vous apprenez à maîtriser les techniques en tenant compte des morphologies, carnations et spécificités de chaque cliente pour un résultat sur-mesure et longue tenue.",
+      programme: [
+        "Jour 1 — Histoire du maquillage, hygiène et mise en place du poste de travail, produits et outils du maquilleur, approche client : fiche client, diagnostic de peau. Morphologie : types de peaux, formes de visages, yeux et bouches",
+        "Jour 2 — Le teint : cercle chromatique, fond de teint, correcteurs, poudres, contouring, strobing, illuminer un visage. Les sourcils : formes, produits. La bouche : corrections, dégradés, lèvres effet mordu. Évaluation intermédiaire sur modèle",
+        "Jour 3 — Les yeux : formes, rééquilibrage du regard, eye liner. Yeux fumés : crayon en dégradé, choix des fards selon carnation et couleur des yeux, mascara, pose de faux cils individuels",
+        "Jour 4 — Smoky eyes : dégradé, base d'accroche, fards noirs, faux cils franges. Maquillage libanais : eye liner, nacres, contouring accentué, faux cils. Réalisation d'un maquillage mariage libanais complet",
+        "Jour 5 — Maquillage mariée : analyser les envies, teint parfait et résistant, zones de lumières, regard illuminé. Évaluation finale sur modèle vivant en temps limité, débriefing, questionnaire de satisfaction, remise de l'attestation",
+        "Matériel fourni : fonds de teint, poudres, crayons, fards, mascaras, pinceaux désinfectés, éclairage photographique, modèles humains",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Aucun prérequis. Formation accessible aux débutants. Ouverte à tous les professionnels de la beauté et de l'esthétique souhaitant maîtriser les techniques de maquillage."
+    },
+    8: {
+      tag: "Beauté · Dermopigmentation",
+      title: "Maquillage Permanent\n<em>Techniques de Dermopigmentation</em>",
+      imgClass: "img-08",
+      duree: "5 jours (30h)", places: "4 max.", niveau: "Débutant", certif: "Oui",
+      prix: "1 250 €",
+      doc: "modules/Programme%20de%20formation%20MAQUILLAGE%20PERMANANT%20.docx",
+      description: "Formation complète aux techniques de maquillage permanent par dermopigmentation esthétique. En 5 jours, vous maîtrisez la réglementation, l'hygiène, la colorimétrie, le mapping morphologique ainsi que les techniques pratiques sur sourcils (poudré, poil à poil, shading), lèvres (Candy Lips, contour, dégradé) et eye-liner. Formation pratique sur latex puis sur modèles réels.",
+      programme: [
+        "Jour 1 — Réglementation & hygiène : cadre légal du maquillage permanent, décret Hygiène et Salubrité, anatomie et physiologie de la peau, contre-indications, risques infectieux et allergiques, désinfection/stérilisation, gestion des déchets DASRI, consentement client et traçabilité",
+        "Jour 2 — Colorimétrie & morphologie : théorie des couleurs, neutralisation des pigments, choix des teintes selon phototype. Étude morphologique du visage, mapping sourcils et lèvres, symétrie et proportions",
+        "Jour 3 — Techniques sourcils : présentation du matériel, réglage du dermographe, choix des aiguilles. Techniques poudré, shading et poil à poil. Gestuelle et profondeur, pratique sur latex puis sur modèle réel",
+        "Jour 4 — Techniques lèvres & eye-liner : Candy Lips, contour et dégradé lèvres, eye-liner poudré, ras de cils, étirements de peau, gestion de la douleur, correction des asymétries",
+        "Jour 5 — Gestion d'activité : tarification, assurances professionnelles, communication réseaux sociaux, fidélisation clientèle, retouches et SAV. Évaluation finale sur modèle en mise en situation professionnelle, remise de l'attestation",
+        "Matériel fourni : dermographes professionnels, pigments, consommables, peaux synthétiques, salle conforme aux normes d'hygiène",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Entretien préalable de positionnement. Formation Hygiène et Salubrité recommandée ou obligatoire selon l'activité exercée. Accessible aux débutants."
+    },
+    9: {
+      tag: "Beauté · Prothésie Ongulaire",
+      title: "Manucure Russe\n<em>&amp; Pose Popits</em>",
+      imgClass: "img-09",
+      duree: "5 jours (35h)", places: "À définir", niveau: "Tous publics", certif: "Oui",
+      prix: "1 200 €",
+      doc: "modules/Programme%20de%20formation%20prothesiste%20ongulaire%20.docx",
+      description: "Formation intensive en manucure russe et pose Popits. En 5 jours, vous maîtrisez les techniques professionnelles de prothésie ongulaire : gainage, construction, formes (carré, ovale slim), finitions (French, baby-boomer, couleur sous cuticules) et nail art (stamping, stickers, strass). Formation pratique sur modèles réels avec matériel professionnel fourni.",
+      programme: [
+        "Jour 1 — Manucure russe & Rubber Base Color : présentation du matériel et règles d'hygiène, anatomie de l'ongle, utilisation de la ponceuse et des embouts, préparation de l'ongle naturel, technique de manucure russe, application de la rubber base color, mise en pratique sur modèle",
+        "Jour 2 — Gainage sans limage & couleur sous cuticules : technique de gainage renforcé, méthode sans limage, gel auto-égalisant, couleur sous cuticules, pose de strass, correction des erreurs fréquentes, exercices pratiques",
+        "Jour 3 — Pose complète Popits & baby-boomer : présentation de la technique Popits, choix des capsules et architecture, construction complète de l'ongle, technique du baby-boomer, finitions professionnelles, pratique sur modèle",
+        "Jour 4 — Forme carrée, French & stamping : création d'une pose carrée complète, techniques de limage, French manucure, initiation au stamping, réalisation de décorations, perfectionnement pratique",
+        "Jour 5 — Forme ovale slim & décorations : création d'une pose ovale slim, gestion de l'architecture, stickers et décorations, finitions et brillance. Évaluation pratique finale en autonomie, bilan de fin de formation, remise de l'attestation",
+        "Matériel professionnel mis à disposition : ponceuse, embouts, gels UV, lampes UV/LED, Popits, pigments et consommables",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Aucun prérequis obligatoire. Motivation et intérêt pour le domaine de l'esthétique recommandés. Formation ouverte à tous les professionnels de la beauté et de l'esthétique."
+    },
+    10: {
+      tag: "Accompagnement · Digital",
+      title: "Community Manager\n<em>Réseaux Sociaux &amp; Communication</em>",
+      imgClass: "img-10",
+      duree: "5 jours (35h)", places: "À définir", niveau: "Débutant", certif: "Oui",
+      prix: "990 €",
+      doc: "modules/Programme%20de%20formation%20DIGITAL%20.docx",
+      description: "Formation complète au Community Management pour développer et gérer une communication efficace sur les réseaux sociaux. En 5 jours, vous maîtrisez la stratégie digitale, la création de contenu (Reels, Stories, Carrousels), la gestion des plateformes Instagram, Facebook, TikTok et LinkedIn, ainsi que l'analyse des performances. Idéal pour les entrepreneurs et professionnels de la beauté.",
+      programme: [
+        "Jour 1 — Introduction au Community Management : définition du métier, missions, panorama des réseaux sociaux, tendances digitales, image de marque. Stratégie : définir sa cible, identifier son client idéal, construire une ligne éditoriale, calendrier de publication, identité visuelle",
+        "Jour 2 — Création de contenu : bases du storytelling, rédaction de publications efficaces, création de visuels attractifs, introduction à Canva, formats performants (Reels, Stories, Carrousels, vidéos courtes). Gestion : publication, programmation, messages, commentaires, e-réputation",
+        "Jour 3 — Développement de visibilité : algorithmes des réseaux sociaux, hashtags et référencement, collaborations et influence, jeux concours, publicité sponsorisée (initiation). Analyse des performances : statistiques, taux d'engagement, portée, impressions, ajustement de stratégie",
+        "Jour 4 — Outils professionnels : Canva, Meta Business Suite, planification de contenu, organisation client, veille concurrentielle. Approfondissement Instagram, Facebook, TikTok et LinkedIn : fonctionnement et bonnes pratiques",
+        "Jour 5 — Approfondissement des réseaux sociaux, mise en situation professionnelle. Évaluation finale QCM, débriefing général, questionnaire de satisfaction, remise de l'attestation de formation",
+        "7 modules progressifs : du Community Management à l'analyse de performance en passant par la création de contenu",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Savoir utiliser un ordinateur et un smartphone. Avoir une adresse e-mail active. Formation ouverte aux entrepreneurs, auto-entrepreneurs, professionnels de la beauté, commerçants et personnes en reconversion."
+    },
+    11: {
+      tag: "Accompagnement · Certification Qualité",
+      title: "Accompagnement vers\n<em>la Certification Qualiopi</em>",
+      imgClass: "img-11",
+      duree: "10 jours (70h)", places: "À définir", niveau: "Professionnel", certif: "Oui",
+      prix: "1 750 €",
+      doc: "modules/Programme%20de%20formation%20DACCOMPAGNEMENT%20QUALIOPI%20.docx",
+      description: "Formation complète pour accompagner un organisme de formation vers la certification Qualiopi. En 10 jours, vous maîtrisez les 7 critères et 32 indicateurs du Référentiel National Qualité, la construction des preuves de conformité, la réalisation d'un diagnostic qualité et la préparation aux audits initial, de surveillance et de renouvellement.",
+      programme: [
+        "Jours 1 & 2 — Introduction à Qualiopi : historique, réforme de la formation professionnelle, Référentiel National Qualité, obligations des organismes de formation, types d'audits (initial, surveillance, renouvellement), fonctionnement des certificateurs. Critères 1 à 3 : informer le public, identifier les objectifs, adapter les prestations",
+        "Jours 3 & 4 — Critères 4 à 7 : suivi et évaluation, qualification des intervenants, inscription dans l'environnement professionnel, amélioration continue. Construction des preuves : documents obligatoires (programme, convention, règlement intérieur, livret d'accueil, questionnaires satisfaction, évaluations, certificats)",
+        "Jours 5 & 6 — Gestion documentaire : process qualité, procédures internes, veille réglementaire, gestion des preuves. Amélioration continue : plan d'amélioration, tableaux de suivi, analyse des indicateurs qualité",
+        "Jours 7 & 8 — Suivi qualité : veille réglementaire et métier, gestion des réclamations. Diagnostic qualité : audit interne, diagnostic documentaire, analyse des non-conformités, plan d'actions correctives",
+        "Jours 9 & 10 — Préparation à l'audit : déroulement d'un audit, attentes des auditeurs, gestion du stress, présentation des preuves, réponses aux questions, traitement des non-conformités. Simulation complète d'audit Qualiopi sur dossier réel, évaluation finale (QCM + mise en situation), remise de l'attestation",
+        "7 modules progressifs : du cadre réglementaire à la simulation d'audit en conditions réelles",
+        "Lieu : 112 Avenue Paul Valéry — 83160 La Valette du Var"
+      ],
+      prerequis: "Connaissance de base de la formation professionnelle et du fonctionnement d'un organisme de formation. Maîtrise des outils bureautiques. Public visé : responsables qualité, consultants formation, dirigeants d'organismes de formation, référents qualité, formateurs indépendants, porteurs de projet OF/CFA."
+    },
+  };
+
+  /* ── MODAL LOGIC ──────────────────────────────────────────────────── */
+  const overlay  = document.getElementById('modalOverlay');
+  const panel    = document.getElementById('modalPanel');
+  const closeBtn = document.getElementById('modalClose');
+
+  function openModal(id) {
+    const f = formations[id];
+    if (!f) return;
+
+    // Image
+    document.getElementById('modalImage').className = 'modal-image ' + f.imgClass;
+    document.getElementById('modalEyebrow').textContent = f.tag;
+    document.getElementById('modalTitle').innerHTML = f.title.replace('\n', '<br/>');
+
+    // Specs
+    const specs = `
+    <div class="spec-box"><div class="spec-value">${f.duree}</div><div class="spec-label">Durée</div></div>
+    <div class="spec-box"><div class="spec-value">${f.places}</div><div class="spec-label">Participants</div></div>
+    <div class="spec-box"><div class="spec-value">${f.niveau}</div><div class="spec-label">Niveau</div></div>
+    <div class="spec-box"><div class="spec-value">${f.certif}</div><div class="spec-label">Attestation</div></div>
+  `;
+
+    // Programme
+    const progItems = f.programme.map(p => `<li>${p}</li>`).join('');
+
+    document.getElementById('modalBody').innerHTML = `
+    <p class="modal-desc">${f.description}</p>
+    <div class="modal-specs">${specs}</div>
+    <p class="modal-section-title">Programme de la formation</p>
+    <ul class="modal-list">${progItems}</ul>
+    <div class="modal-prereq">
+      <p class="modal-prereq-label">Prérequis</p>
+      <p>${f.prerequis}</p>
+    </div>
+  `;
+
+    document.getElementById('modalFooter').innerHTML = `
+    <div class="modal-price">
+      <span class="modal-price-value">${f.prix}</span>
+      <span class="modal-price-label">Tarif</span>
+    </div>
+    <a href="${f.doc}" download class="btn-reserve" style="text-decoration:none">
+      <span>↓ Télécharger le programme</span>
+    </a>
+  `;
+
+    // Animate open
+    overlay.classList.add('open');
+    panel.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    panel.querySelector('.modal-body').scrollTop = 0;
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    panel.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Bind all clickable elements
+  document.querySelectorAll('[data-id]').forEach(el => {
+    el.addEventListener('click', () => openModal(Number(el.dataset.id)));
+  });
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  /* ── SCROLL REVEAL ────────────────────────────────────────────────── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const parent = entry.target.closest('.formations-grid');
+        if (parent) {
+          const siblings = [...parent.querySelectorAll('.reveal')];
+          entry.target.style.transitionDelay = `${siblings.indexOf(entry.target) * 80}ms`;
+        }
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Animation barre + chiffres au scroll
+  const satisfactionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+
+        // Anime la barre
+        const bar = document.querySelector('.satisfaction-progress');
+        if (bar) bar.classList.add('animate');
+
+        // Anime les chiffres avec effet compteur
+        document.querySelectorAll('.satisfaction-stat-number').forEach((el, i) => {
+          const target = parseFloat(el.dataset.target);
+          const isDecimal = String(target).includes('.');
+          const duration = 2000;
+          const start = performance.now();
+
+          setTimeout(() => {
+            el.classList.add('animate');
+            const tick = (now) => {
+              const elapsed = now - start;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              const value = eased * target;
+              el.textContent = (isDecimal ? value.toFixed(1) : Math.floor(value)) + '%';
+              if (progress < 1) requestAnimationFrame(tick);
+              else el.textContent = (isDecimal ? target.toFixed(1) : target) + '%';
+            };            requestAnimationFrame(tick);
+          }, i * 200);
+        });
+
+        satisfactionObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const satisfactionBand = document.querySelector('.satisfaction-band');
+  if (satisfactionBand) satisfactionObserver.observe(satisfactionBand);
+</script>
+</body>
+</html>
